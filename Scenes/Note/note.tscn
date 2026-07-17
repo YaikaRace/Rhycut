@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://02leyw6bf53e"]
+
+[ext_resource type="Script" uid="uid://b8j6o1jmdy74a" path="res://Scripts/Note/note.gd" id="1_b7tbv"]
+[ext_resource type="PackedScene" uid="uid://b44y001nhprx6" path="res://Scenes/Note/item.tscn" id="1_rb04o"]
+[ext_resource type="Shader" uid="uid://cssblnne8l8p1" path="res://Resources/Shaders/outline_yr.gdshader" id="3_3f8so"]
+[ext_resource type="AudioStream" uid="uid://cmrioswowq4kj" path="res://Assets/SFX/wood_break.mp3" id="4_3f8so"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3f8so"]
+resource_local_to_scene = true
+shader = ExtResource("3_3f8so")
+shader_parameter/col = Color(1, 1, 0.92156863, 1)
+shader_parameter/color = Color(1, 1, 0.92156863, 1)
+shader_parameter/quantity = 0.0
+
+[node name="note" unique_id=31069206 instance=ExtResource("1_rb04o")]
+script = ExtResource("1_b7tbv")
+
+[node name="sprite" parent="." index="0" unique_id=970031995]
+material = SubResource("ShaderMaterial_3f8so")
+
+[node name="sfx" type="AudioStreamPlayer" parent="." index="5" unique_id=1215600621]
+unique_name_in_owner = true
+stream = ExtResource("4_3f8so")
+volume_db = -7.0
+bus = &"SFX"

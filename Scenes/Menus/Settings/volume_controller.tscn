@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dsi3lcmhi2dbj"]
+
+[ext_resource type="Theme" uid="uid://c08u4scde3g3e" path="res://Resources/Themes/main.tres" id="1_c70x6"]
+[ext_resource type="Script" uid="uid://bxsnsfuio447j" path="res://Scripts/Menus/Settings/volume_controller.gd" id="2_n1kx1"]
+
+[node name="volume_controller" type="VBoxContainer" unique_id=1474185997]
+custom_minimum_size = Vector2(100, 0)
+theme = ExtResource("1_c70x6")
+script = ExtResource("2_n1kx1")
+
+[node name="name_label" type="Label" parent="." unique_id=461336752]
+layout_mode = 2
+text = "General"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=620787301]
+layout_mode = 2
+
+[node name="volume_slider" type="HSlider" parent="HBoxContainer" unique_id=1003967359]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 6
+value = 100.0
+
+[node name="volume_spinbox" type="SpinBox" parent="HBoxContainer" unique_id=745895768]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+value = 100.0
+suffix = "%"
+
+[connection signal="value_changed" from="HBoxContainer/volume_slider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/volume_spinbox" to="." method="_on_volume_spinbox_value_changed"]

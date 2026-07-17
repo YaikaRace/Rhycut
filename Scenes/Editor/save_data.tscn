@@ -1,0 +1,214 @@
+[gd_scene format=3 uid="uid://twe34ajuycja"]
+
+[ext_resource type="Theme" uid="uid://c08u4scde3g3e" path="res://Resources/Themes/main.tres" id="1_tw1ra"]
+[ext_resource type="Script" uid="uid://dgbe11ebnlcyq" path="res://Scripts/Editor/save_data.gd" id="2_jhuh7"]
+[ext_resource type="Theme" uid="uid://obw7ojv663bq" path="res://Resources/Themes/form.tres" id="3_jhuh7"]
+[ext_resource type="Texture2D" uid="uid://parc73oneesw" path="res://Assets/Sprites/music-note.png" id="4_jhuh7"]
+
+[node name="save_data" type="ConfirmationDialog" unique_id=294019261]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(250, 158)
+visible = true
+borderless = true
+transparent = true
+theme = ExtResource("1_tw1ra")
+ok_button_text = "Save"
+script = ExtResource("2_jhuh7")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1684572673]
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 247.0
+offset_bottom = 124.0
+theme = ExtResource("3_jhuh7")
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=165290575]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1597726172]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1066655641]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=287294917]
+layout_mode = 2
+text = "Name"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=358690123]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.41960785, 0.5921569, 1)
+text = "*"
+
+[node name="name_edit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=582206401]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "e.g. My First Map"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=678472779]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1202603855]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer" unique_id=933991928]
+layout_mode = 2
+text = "Author"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer" unique_id=202555170]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.41960785, 0.5921569, 1)
+text = "*"
+
+[node name="author_edit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1335169311]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "e.g. YaikaRace"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=368387441]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer7" unique_id=817304741]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer7/HBoxContainer" unique_id=686833797]
+layout_mode = 2
+text = "Map Version"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer7/HBoxContainer" unique_id=115573767]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.41960785, 0.5921569, 1)
+text = "*"
+
+[node name="map_version_edit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer7" unique_id=855218108]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1.0"
+placeholder_text = "e.g., 1.0"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=393864085]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1622954674]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer" unique_id=358059419]
+layout_mode = 2
+text = "Song name"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer" unique_id=495212292]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.41960785, 0.5921569, 1)
+text = "*"
+
+[node name="music_edit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1282778732]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "e.g. Für Elise"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1503804868]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer4" unique_id=400528495]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer4/HBoxContainer" unique_id=46824389]
+layout_mode = 2
+text = "Song author"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer4/HBoxContainer" unique_id=238325416]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.41960785, 0.5921569, 1)
+text = "*"
+
+[node name="music_author_edit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer4" unique_id=131864278]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "e.g. Beethoven"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=910807652]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer6" unique_id=1165034806]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Song Website"
+
+[node name="song_website_edit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer6" unique_id=1881258685]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "https://..."
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=546733202]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer5" unique_id=1315389622]
+layout_mode = 2
+text = "Icon:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer5" unique_id=1117896134]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="icon_texture" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer5/HBoxContainer" unique_id=1135688649]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("4_jhuh7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="icon_select" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer5/HBoxContainer" unique_id=1770577211]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "select"
+
+[node name="warning" type="Label" parent="MarginContainer/VBoxContainer" unique_id=651601775]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6901961, 0.1882353, 0.36078432, 1)
+text = "You must fill in all fields"
+
+[node name="image_select_dialog" type="FileDialog" parent="." unique_id=20638561]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Open a File"
+position = Vector2i(0, 36)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png,*.jpg,*.jpeg,*.svg;Image File")
+use_native_dialog = true
+
+[connection signal="confirmed" from="." to="." method="_on_confirmed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer5/HBoxContainer/icon_select" to="." method="_on_icon_select_pressed"]
+[connection signal="file_selected" from="image_select_dialog" to="." method="_on_image_select_dialog_file_selected"]

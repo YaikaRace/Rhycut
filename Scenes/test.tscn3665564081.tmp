@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bynldplhygse5"]
+
+[ext_resource type="PackedScene" uid="uid://b44y001nhprx6" path="res://Scenes/Note/note.tscn" id="1_lc1oi"]
+[ext_resource type="Script" uid="uid://dbskqw1ufc4t" path="res://Scripts/test.gd" id="1_qc4db"]
+[ext_resource type="Script" uid="uid://dos3qhffr4v0a" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="2_8od7v"]
+[ext_resource type="AudioStream" uid="uid://clrnw6o3y6tce" path="res://Assets/Test/kasane teto - fukkireta full song.mp3" id="4_ys1qc"]
+
+[node name="test" type="Node2D" unique_id=318710393]
+script = ExtResource("1_qc4db")
+note_scene = ExtResource("1_lc1oi")
+
+[node name="RhythmNotifier" type="Node" parent="." unique_id=1485865011 node_paths=PackedStringArray("audio_stream_player")]
+script = ExtResource("2_8od7v")
+bpm = 150.0
+beat_length = 0.4
+audio_stream_player = NodePath("../AudioStreamPlayer")
+running = true
+metadata/_custom_type_script = "uid://dos3qhffr4v0a"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=914420351]
+position = Vector2(160, 90)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=927867457]
+stream = ExtResource("4_ys1qc")
+autoplay = true
+
+[connection signal="beat" from="RhythmNotifier" to="." method="_on_rhythm_notifier_beat"]

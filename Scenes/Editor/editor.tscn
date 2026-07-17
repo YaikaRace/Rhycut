@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://eyrw5ccjmus"]
+
+[ext_resource type="Script" uid="uid://u5nv4a1crdw" path="res://Scripts/Editor/editor.gd" id="1_3ysjy"]
+[ext_resource type="PackedScene" uid="uid://cvowb66aitrq7" path="res://Scenes/Editor/editor_hud.tscn" id="1_kvxkh"]
+[ext_resource type="PackedScene" uid="uid://b44y001nhprx6" path="res://Scenes/Note/item.tscn" id="2_ub1o7"]
+[ext_resource type="Script" uid="uid://de1xm2a5pff4k" path="res://Scripts/Resources/note_resource.gd" id="3_wwoqk"]
+[ext_resource type="PackedScene" uid="uid://usyco828m88h" path="res://Scenes/Note/bomb.tscn" id="3_ytwan"]
+[ext_resource type="Script" uid="uid://djlnctwdlhb8c" path="res://Scripts/Resources/beatmap.gd" id="4_1xg6d"]
+[ext_resource type="Texture2D" uid="uid://obhvqrxyyqks" path="res://Assets/Sprites/log.png" id="7_1xg6d"]
+[ext_resource type="Texture2D" uid="uid://834oowr1x1mj" path="res://Assets/Sprites/bg-shadow.png" id="7_bx3ly"]
+[ext_resource type="Script" uid="uid://dos3qhffr4v0a" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="8_o25bw"]
+[ext_resource type="Texture2D" uid="uid://bapl7srk0jjsc" path="res://Assets/Sprites/bg.png" id="9_l58k3"]
+[ext_resource type="PackedScene" uid="uid://cge6pcpu61cu0" path="res://Scenes/Menus/Pause Menu/pause_menu.tscn" id="11_ytwan"]
+
+[sub_resource type="Resource" id="Resource_bx3ly"]
+script = ExtResource("4_1xg6d")
+metadata/_custom_type_script = "uid://djlnctwdlhb8c"
+
+[node name="editor" type="Node2D" unique_id=968411049]
+script = ExtResource("1_3ysjy")
+note_scene = ExtResource("2_ub1o7")
+bomb_scene = ExtResource("3_ytwan")
+beatmap = SubResource("Resource_bx3ly")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=210477622]
+z_index = -2
+offset_right = 320.0
+offset_bottom = 180.0
+mouse_filter = 2
+color = Color(0.3529412, 0.14901961, 0.36862746, 1)
+
+[node name="song_player" type="AudioStreamPlayer" parent="." unique_id=473661634]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="BgShadow" type="Sprite2D" parent="." unique_id=309864201]
+position = Vector2(160, 90)
+texture = ExtResource("7_bx3ly")
+
+[node name="notes_container" type="Node2D" parent="." unique_id=2135477374]
+unique_name_in_owner = true
+
+[node name="preview" type="Sprite2D" parent="." unique_id=1826919153]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.37254903)
+texture = ExtResource("7_1xg6d")
+
+[node name="rhythm" type="Node" parent="." unique_id=993591685 node_paths=PackedStringArray("audio_stream_player")]
+unique_name_in_owner = true
+script = ExtResource("8_o25bw")
+audio_stream_player = NodePath("../song_player")
+running = true
+metadata/_custom_type_script = "uid://dos3qhffr4v0a"
+
+[node name="preview_player" type="AudioStreamPlayer" parent="." unique_id=1868797382]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="Bg" type="Sprite2D" parent="." unique_id=196524418]
+z_index = 4
+position = Vector2(160, 90)
+texture = ExtResource("9_l58k3")
+
+[node name="editor_hud" parent="." unique_id=896509598 instance=ExtResource("1_kvxkh")]
+unique_name_in_owner = true
+
+[node name="pause_menu" parent="." unique_id=796115068 instance=ExtResource("11_ytwan")]
+visible = false
+is_editor = true
+
+[connection signal="audio_loaded" from="editor_hud" to="." method="_on_editor_hud_audio_loaded"]
+[connection signal="beat_back" from="editor_hud" to="." method="_on_editor_hud_beat_back"]
+[connection signal="beat_forward" from="editor_hud" to="." method="_on_editor_hud_beat_forward"]
+[connection signal="beatmap_loaded" from="editor_hud" to="." method="_on_editor_hud_beatmap_loaded"]
+[connection signal="bpm_changed" from="editor_hud" to="." method="_on_editor_hud_bpm_changed"]
+[connection signal="pause_music" from="editor_hud" to="." method="_on_editor_hud_pause_music"]
+[connection signal="pause_preview" from="editor_hud" to="." method="_on_editor_hud_pause_preview"]
+[connection signal="play_music" from="editor_hud" to="." method="_on_editor_hud_play_music"]
+[connection signal="play_preview" from="editor_hud" to="." method="_on_editor_hud_play_preview"]
+[connection signal="song_position_changed" from="editor_hud" to="." method="_on_editor_hud_song_position_changed"]

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://usyco828m88h"]
+
+[ext_resource type="PackedScene" uid="uid://b44y001nhprx6" path="res://Scenes/Note/item.tscn" id="1_xho8u"]
+[ext_resource type="Script" uid="uid://5c4x0gux5a2d" path="res://Scripts/Note/bomb.gd" id="2_pq5ff"]
+[ext_resource type="Shader" uid="uid://cssblnne8l8p1" path="res://Resources/Shaders/outline_yr.gdshader" id="2_w0n6c"]
+[ext_resource type="Texture2D" uid="uid://bu0tafg70lqwb" path="res://Assets/Sprites/bomb.png" id="3_w0n6c"]
+[ext_resource type="AudioStream" uid="uid://c4j57lfwfv4je" path="res://Assets/SFX/bomb.mp3" id="5_palvq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_palvq"]
+resource_local_to_scene = true
+shader = ExtResource("2_w0n6c")
+shader_parameter/col = Color(1, 1, 0.92156863, 1)
+shader_parameter/color = Color(1, 1, 0.92156863, 1)
+shader_parameter/quantity = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w0n6c"]
+radius = 13.0
+
+[node name="bomb" unique_id=31069206 instance=ExtResource("1_xho8u")]
+script = ExtResource("2_pq5ff")
+note_indicator = false
+
+[node name="sprite" parent="." index="0" unique_id=970031995]
+material = SubResource("ShaderMaterial_palvq")
+texture = ExtResource("3_w0n6c")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=627927054]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_w0n6c")
+
+[node name="sfx" type="AudioStreamPlayer" parent="." index="5" unique_id=1494381878]
+stream = ExtResource("5_palvq")
+bus = &"SFX"

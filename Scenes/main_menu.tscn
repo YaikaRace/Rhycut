@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dh8uc0b1sduu3"]
+
+[ext_resource type="Script" uid="uid://bqs30i5nt4u6q" path="res://Scripts/main_menu.gd" id="1_28flt"]
+[ext_resource type="Theme" uid="uid://c08u4scde3g3e" path="res://Resources/Themes/main.tres" id="1_48xlc"]
+[ext_resource type="Texture2D" uid="uid://0hahr8hrl5cb" path="res://Assets/UI Icons/menu-bg.png" id="3_1ehe0"]
+
+[node name="main_menu" type="Control" unique_id=446648310]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_48xlc")
+script = ExtResource("1_28flt")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=206706602]
+z_index = -2
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0.3529412, 0.14901961, 0.36862746, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=240999615]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_1ehe0")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=300141509]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=351922591]
+layout_mode = 2
+
+[node name="play" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2042517972]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Play"
+
+[node name="editor" type="Button" parent="CenterContainer/VBoxContainer" unique_id=455853864]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Editor"
+
+[node name="settings" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1814264793]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Settings"
+
+[node name="exit" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2103946584]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Exit"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/editor" to="." method="_on_editor_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/exit" to="." method="_on_exit_pressed"]

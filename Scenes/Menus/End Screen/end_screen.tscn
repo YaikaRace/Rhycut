@@ -1,0 +1,153 @@
+[gd_scene format=3 uid="uid://baog7robrv7x2"]
+
+[ext_resource type="Theme" uid="uid://c08u4scde3g3e" path="res://Resources/Themes/main.tres" id="1_lqwtc"]
+[ext_resource type="Script" uid="uid://758788a8y3m0" path="res://Scripts/Menus/End Screen/end_screen.gd" id="2_jgufv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ciwl4"]
+font_size = 32
+font_color = Color(1, 0.89411765, 0.47058824, 1)
+
+[node name="end_screen" type="CanvasLayer" unique_id=402914075]
+script = ExtResource("2_jgufv")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1970255819]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25882354, 0.14117648, 0.27058825, 0.39215687)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1425932771]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_lqwtc")
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=897393427]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1070409769]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=542413343]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=214670575]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=807024427]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.89411765, 0.47058824, 1)
+text = "Perfect:"
+
+[node name="p_count" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1341287964]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1738459560]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1649746570]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3019608, 0.6509804, 1, 1)
+text = "Great:"
+
+[node name="gr_count" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=781243920]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1510793054]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3" unique_id=1502646782]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.56078434, 0.87058824, 0.3647059, 1)
+text = "Good:"
+
+[node name="g_count" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3" unique_id=212524720]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1321606738]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4" unique_id=1449747593]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6901961, 0.1882353, 0.36078432, 1)
+text = "Bad:"
+
+[node name="b_count" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4" unique_id=1417754004]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1500345000]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer5" unique_id=812147543]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3764706, 0.3764706, 0.4392157, 1)
+text = "Miss:"
+
+[node name="m_count" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer5" unique_id=2074068622]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2117107436]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer6" unique_id=1660300536]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.23529412, 0.6392157, 0.4392157, 1)
+text = "Accuracy:"
+
+[node name="accuracy_label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer6" unique_id=1205073692]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100%"
+
+[node name="rank_label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1353847141]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "S+"
+label_settings = SubResource("LabelSettings_ciwl4")
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=86875681]
+layout_mode = 2
+alignment = 1
+
+[node name="restart" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1087874575]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Restart"
+
+[node name="back_to_menu" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1865079038]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Main Menu"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/back_to_menu" to="." method="_on_back_to_menu_pressed"]

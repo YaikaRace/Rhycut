@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://o0ylnto6fyv1"]
+
+[ext_resource type="Script" uid="uid://dln7ha7bwnovn" path="res://Scripts/Menus/scroll_label.gd" id="1_vyymq"]
+
+[node name="scroll_label" type="ScrollContainer" unique_id=922118309]
+mouse_filter = 2
+scroll_horizontal = 18
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+script = ExtResource("1_vyymq")
+waiting_time = 5.0
+
+[node name="label" type="Label" parent="." unique_id=1781570693]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 0.92156863, 1)
+text = "Placeholder"

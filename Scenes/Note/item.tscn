@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://b44y001nhprx6"]
+
+[ext_resource type="Script" uid="uid://hy8ghpt481yv" path="res://Scripts/Note/item.gd" id="1_vftyd"]
+[ext_resource type="PackedScene" uid="uid://dh6eehfkmat0e" path="res://Scenes/Note/note_particles.tscn" id="2_dx5si"]
+[ext_resource type="Shader" uid="uid://cssblnne8l8p1" path="res://Resources/Shaders/outline_yr.gdshader" id="3_qaclo"]
+[ext_resource type="Texture2D" uid="uid://obhvqrxyyqks" path="res://Assets/Sprites/log.png" id="4_yyj6j"]
+[ext_resource type="Script" uid="uid://b4rr68x46miwr" path="res://Scripts/Components/gravity_component.gd" id="5_qalsj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3f8so"]
+resource_local_to_scene = true
+shader = ExtResource("3_qaclo")
+shader_parameter/col = Color(1, 1, 0.92156863, 1)
+shader_parameter/color = Color(1, 1, 0.92156863, 1)
+shader_parameter/quantity = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p2b7e"]
+radius = 18.0
+
+[node name="item" type="CharacterBody2D" unique_id=31069206]
+collision_mask = 0
+input_pickable = true
+script = ExtResource("1_vftyd")
+particles = ExtResource("2_dx5si")
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=970031995]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_3f8so")
+texture = ExtResource("4_yyj6j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=627927054]
+shape = SubResource("CircleShape2D_p2b7e")
+
+[node name="lifetime" type="Timer" parent="." unique_id=1252443938]
+unique_name_in_owner = true
+wait_time = 7.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=2138314076]
+rect = Rect2(-23, -19, 46, 38)
+
+[node name="GravityComponent" type="Node" parent="." unique_id=1891314470]
+unique_name_in_owner = true
+script = ExtResource("5_qalsj")
+metadata/_custom_type_script = "uid://b4rr68x46miwr"
+
+[connection signal="timeout" from="lifetime" to="." method="_on_lifetime_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

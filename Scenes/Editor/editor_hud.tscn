@@ -1,0 +1,357 @@
+[gd_scene format=3 uid="uid://cvowb66aitrq7"]
+
+[ext_resource type="Script" uid="uid://cxoa6u3rniyru" path="res://Scripts/Editor/editor_hud.gd" id="1_seqll"]
+[ext_resource type="Texture2D" uid="uid://cl66lpj5aeoj1" path="res://Assets/Editor Icons/cursor.png" id="2_hdn44"]
+[ext_resource type="Theme" uid="uid://li00vskkdj62" path="res://Resources/Themes/main_editor.tres" id="2_so3mq"]
+[ext_resource type="Texture2D" uid="uid://drkd7ol5loi5i" path="res://Assets/Editor Icons/Buttons/button_normal.png" id="2_xywmh"]
+[ext_resource type="Texture2D" uid="uid://c10s5vldlg022" path="res://Assets/Editor Icons/pencil.png" id="3_ek841"]
+[ext_resource type="Texture2D" uid="uid://dvprlel5awg3g" path="res://Assets/Editor Icons/Buttons/button_pressed.png" id="3_wsxd6"]
+[ext_resource type="Texture2D" uid="uid://bny5ug8wu4h3g" path="res://Assets/Editor Icons/eraser.png" id="4_ay7jw"]
+[ext_resource type="Texture2D" uid="uid://rjnlrm8x0ip0" path="res://Assets/Editor Icons/-1beat.png" id="7_a5qys"]
+[ext_resource type="Texture2D" uid="uid://davlxsp7yfocn" path="res://Assets/Editor Icons/Buttons/button_hover.png" id="7_dqeoq"]
+[ext_resource type="Texture2D" uid="uid://xbh1uhr8m1nm" path="res://Assets/Editor Icons/+1beat.png" id="8_gjfqd"]
+[ext_resource type="Texture2D" uid="uid://bqytsfr23c3xq" path="res://Assets/Editor Icons/play icon.png" id="8_v8i4o"]
+[ext_resource type="Texture2D" uid="uid://ctmevvamj7nij" path="res://Assets/Editor Icons/save-icon.png" id="9_3ow7l"]
+[ext_resource type="Texture2D" uid="uid://dkayg1nxfqsbp" path="res://Assets/Editor Icons/play-music.png" id="9_dddj0"]
+[ext_resource type="Texture2D" uid="uid://cey7e62kqm3th" path="res://Assets/Editor Icons/pause.png" id="9_ymiar"]
+[ext_resource type="Texture2D" uid="uid://04xrjv3m03xd" path="res://Assets/Editor Icons/bomb-icon.png" id="13_4ufg6"]
+[ext_resource type="Texture2D" uid="uid://pshv3h5s8cj5" path="res://Assets/Editor Icons/open-file.png" id="15_hx62y"]
+[ext_resource type="Texture2D" uid="uid://b755lb4y02an3" path="res://Assets/Editor Icons/open-music-file.png" id="16_3d50k"]
+[ext_resource type="PackedScene" uid="uid://twe34ajuycja" path="res://Scenes/Editor/save_data.tscn" id="17_rk6w7"]
+[ext_resource type="Script" uid="uid://ohx00h2idlu0" path="res://addons/html5_file_dialog/HTML5FileDialog.gd" id="19_0q8fr"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_seqll"]
+action = &"pause"
+
+[sub_resource type="Shortcut" id="Shortcut_hdn44"]
+events = [SubResource("InputEventAction_seqll")]
+
+[sub_resource type="LabelSettings" id="LabelSettings_seqll"]
+font_size = 8
+font_color = Color(1, 1, 0.92156863, 1)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_3d50k"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_hx62y"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_3d50k"]
+events = [SubResource("InputEventAction_hx62y")]
+
+[node name="editor_hud" type="CanvasLayer" unique_id=896509598]
+script = ExtResource("1_seqll")
+
+[node name="Control" type="Control" parent="." unique_id=568074975]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_so3mq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=59662305]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 152.0
+offset_right = 304.0
+offset_bottom = 177.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/HBoxContainer" unique_id=352399047]
+layout_mode = 2
+alignment = 1
+
+[node name="play_pause" type="TextureButton" parent="Control/HBoxContainer/VBoxContainer2" unique_id=1621371148]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Play / Pause Preview"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_pressed = true
+shortcut = SubResource("Shortcut_hdn44")
+shortcut_in_tooltip = false
+texture_normal = ExtResource("2_xywmh")
+texture_pressed = ExtResource("3_wsxd6")
+texture_hover = ExtResource("7_dqeoq")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/VBoxContainer2/play_pause" unique_id=1353495466]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_ymiar")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="Control/HBoxContainer/VBoxContainer2/play_pause" unique_id=1672119273]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_v8i4o")
+stretch_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer" unique_id=1141209579]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/HBoxContainer/VBoxContainer" unique_id=1357591665]
+layout_mode = 2
+
+[node name="current_position_label" type="Label" parent="Control/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1425336635]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00:00:00"
+label_settings = SubResource("LabelSettings_seqll")
+
+[node name="duration_label" type="Label" parent="Control/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=720448499]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00:00:00"
+label_settings = SubResource("LabelSettings_seqll")
+horizontal_alignment = 2
+
+[node name="song_position_bar" type="HSlider" parent="Control/HBoxContainer/VBoxContainer" unique_id=591911688]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+mouse_default_cursor_shape = 6
+max_value = 1.0
+step = 0.01
+value = 0.29
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/HBoxContainer" unique_id=1814536759]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/HBoxContainer/VBoxContainer3" unique_id=1034523022]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="beat_back" type="Button" parent="Control/HBoxContainer/VBoxContainer3/HBoxContainer" unique_id=1303824277]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+tooltip_text = "Prev 16th"
+mouse_default_cursor_shape = 2
+icon = ExtResource("7_a5qys")
+icon_alignment = 1
+
+[node name="beat_forward" type="Button" parent="Control/HBoxContainer/VBoxContainer3/HBoxContainer" unique_id=1369999300]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+tooltip_text = "Next 16th"
+mouse_default_cursor_shape = 2
+icon = ExtResource("8_gjfqd")
+icon_alignment = 1
+
+[node name="play_music" type="Button" parent="Control/HBoxContainer/VBoxContainer3/HBoxContainer" unique_id=53955538]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+tooltip_text = "Play music only"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+icon = ExtResource("9_dddj0")
+icon_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=79463337]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 304.0
+offset_bottom = 24.0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=738768929]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="mode_buttons" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer" unique_id=810796671]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="selection" type="Button" parent="Control/VBoxContainer/HBoxContainer/mode_buttons" unique_id=265653776]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+tooltip_text = "Selection"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_3d50k")
+icon = ExtResource("2_hdn44")
+icon_alignment = 1
+
+[node name="pencil" type="Button" parent="Control/VBoxContainer/HBoxContainer/mode_buttons" unique_id=305571959]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+tooltip_text = "Place Note"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3d50k")
+icon = ExtResource("3_ek841")
+icon_alignment = 1
+
+[node name="bomb" type="Button" parent="Control/VBoxContainer/HBoxContainer/mode_buttons" unique_id=178934069]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+tooltip_text = "Place Note"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3d50k")
+icon = ExtResource("13_4ufg6")
+icon_alignment = 1
+
+[node name="eraser" type="Button" parent="Control/VBoxContainer/HBoxContainer/mode_buttons" unique_id=788557570]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+tooltip_text = "Erase Note"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_3d50k")
+icon = ExtResource("4_ay7jw")
+icon_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer" unique_id=354093595]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="test_level" type="Button" parent="Control/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1888920731]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+tooltip_text = "Test map"
+mouse_default_cursor_shape = 2
+icon = ExtResource("8_v8i4o")
+icon_alignment = 1
+
+[node name="save_level" type="Button" parent="Control/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1509365456]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+tooltip_text = "Save to file"
+mouse_default_cursor_shape = 2
+icon = ExtResource("9_3ow7l")
+icon_alignment = 1
+
+[node name="open_level" type="Button" parent="Control/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=940831550]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+tooltip_text = "Open BeatMap file"
+mouse_default_cursor_shape = 2
+icon = ExtResource("15_hx62y")
+icon_alignment = 1
+
+[node name="open_music_file" type="Button" parent="Control/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1944340993]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+tooltip_text = "Open music file"
+mouse_default_cursor_shape = 2
+icon = ExtResource("16_3d50k")
+icon_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer" unique_id=2019597487]
+layout_mode = 2
+
+[node name="bpm_box" type="SpinBox" parent="Control/VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=1710546397]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+value = 60.0
+allow_greater = true
+suffix = "bpm"
+
+[node name="test_window" type="Window" parent="." unique_id=502383087]
+unique_name_in_owner = true
+canvas_item_default_texture_filter = 0
+oversampling_override = 1.0
+mode = 3
+initial_position = 1
+size = Vector2i(320, 180)
+visible = false
+borderless = true
+theme = ExtResource("2_so3mq")
+
+[node name="stop_test" type="Button" parent="test_window" unique_id=925213874]
+z_index = 5
+custom_minimum_size = Vector2(12, 12)
+offset_left = 16.0
+offset_top = 6.0
+offset_right = 28.0
+offset_bottom = 18.0
+tooltip_text = "Stop testing"
+shortcut = SubResource("Shortcut_3d50k")
+shortcut_in_tooltip = false
+icon = ExtResource("9_ymiar")
+icon_alignment = 1
+
+[node name="save_dialog" type="FileDialog" parent="." unique_id=1786286996]
+unique_name_in_owner = true
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+access = 2
+filters = PackedStringArray("*.rcbm;Rhycut BeatMap File")
+use_native_dialog = true
+
+[node name="load_dialog" type="FileDialog" parent="." unique_id=1237407390]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Open a File"
+position = Vector2i(0, 36)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.rcbm;Rhycut BeatMap File")
+use_native_dialog = true
+
+[node name="load_music_file_dialog" type="FileDialog" parent="." unique_id=779080628]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Open a File"
+position = Vector2i(0, 36)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.mp3,*.ogg,*.wav;Audio File")
+use_native_dialog = true
+
+[node name="metadata_form" parent="." unique_id=294019261 instance=ExtResource("17_rk6w7")]
+unique_name_in_owner = true
+visible = false
+
+[node name="load_music_html5" type="Node" parent="." unique_id=1125070643]
+unique_name_in_owner = true
+script = ExtResource("19_0q8fr")
+filters = PackedStringArray("*.mp3,*.ogg,*.wav;Audio File")
+metadata/_custom_type_script = "uid://ohx00h2idlu0"
+
+[node name="load_level_html5" type="Node" parent="." unique_id=1497548229]
+unique_name_in_owner = true
+script = ExtResource("19_0q8fr")
+filters = PackedStringArray("*.mp3,*.ogg,*.wav;Audio File")
+metadata/_custom_type_script = "uid://ohx00h2idlu0"
+
+[connection signal="toggled" from="Control/HBoxContainer/VBoxContainer2/play_pause" to="." method="_on_play_pause_toggled"]
+[connection signal="drag_ended" from="Control/HBoxContainer/VBoxContainer/song_position_bar" to="." method="_on_song_position_bar_drag_ended"]
+[connection signal="drag_started" from="Control/HBoxContainer/VBoxContainer/song_position_bar" to="." method="_on_song_position_bar_drag_started"]
+[connection signal="pressed" from="Control/HBoxContainer/VBoxContainer3/HBoxContainer/beat_back" to="." method="_on_beat_back_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/VBoxContainer3/HBoxContainer/beat_forward" to="." method="_on_beat_forward_pressed"]
+[connection signal="toggled" from="Control/HBoxContainer/VBoxContainer3/HBoxContainer/play_music" to="." method="_on_play_music_toggled"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/HBoxContainer/test_level" to="." method="_on_test_level_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/HBoxContainer/save_level" to="." method="_on_save_level_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/HBoxContainer/open_level" to="." method="_on_open_level_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/HBoxContainer/open_music_file" to="." method="_on_open_music_file_pressed"]
+[connection signal="value_changed" from="Control/VBoxContainer/HBoxContainer/HBoxContainer2/bpm_box" to="." method="_on_bpm_box_value_changed"]
+[connection signal="pressed" from="test_window/stop_test" to="." method="_on_stop_test_pressed"]
+[connection signal="canceled" from="save_dialog" to="." method="_on_save_dialog_canceled"]
+[connection signal="file_selected" from="save_dialog" to="." method="_on_save_dialog_file_selected"]
+[connection signal="file_selected" from="load_dialog" to="." method="_on_load_dialog_file_selected"]
+[connection signal="file_selected" from="load_music_file_dialog" to="." method="_on_load_music_file_dialog_file_selected"]
+[connection signal="finished" from="metadata_form" to="." method="_on_save_data_finished"]
+[connection signal="file_selected" from="load_music_html5" to="." method="_on_html_5_file_dialog_file_selected"]
+[connection signal="file_selected" from="load_level_html5" to="." method="_on_load_level_html_5_file_selected"]

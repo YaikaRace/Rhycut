@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://bynldplhygse5"]
+
+[ext_resource type="Script" uid="uid://dbskqw1ufc4t" path="res://Scripts/game.gd" id="1_3dryh"]
+[ext_resource type="PackedScene" uid="uid://02leyw6bf53e" path="res://Scenes/Note/note.tscn" id="2_wowpa"]
+[ext_resource type="Script" uid="uid://dos3qhffr4v0a" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="3_i6g32"]
+[ext_resource type="PackedScene" uid="uid://usyco828m88h" path="res://Scenes/Note/bomb.tscn" id="3_rku1e"]
+[ext_resource type="FontFile" uid="uid://dq1v5b8rfr1fq" path="res://Assets/Fonts/8_bit_arcade/8-bit Arcade In.ttf" id="7_o5yvi"]
+[ext_resource type="FontFile" uid="uid://p1yoam4mrpxd" path="res://Assets/Fonts/dogica/OTF/dogicapixel.otf" id="8_o5yvi"]
+[ext_resource type="PackedScene" uid="uid://dhenc2eh0i0lo" path="res://Scenes/cut.tscn" id="9_h4fw4"]
+[ext_resource type="Texture2D" uid="uid://bapl7srk0jjsc" path="res://Assets/Sprites/bg.png" id="10_ldgsr"]
+[ext_resource type="Texture2D" uid="uid://834oowr1x1mj" path="res://Assets/Sprites/bg-shadow.png" id="11_o5yvi"]
+[ext_resource type="Texture2D" uid="uid://bx5tlehje012k" path="res://Assets/Editor Icons/Slider/slider.png" id="11_rku1e"]
+[ext_resource type="Theme" uid="uid://c08u4scde3g3e" path="res://Resources/Themes/main.tres" id="12_1phco"]
+[ext_resource type="PackedScene" uid="uid://baog7robrv7x2" path="res://Scenes/Menus/End Screen/end_screen.tscn" id="12_rfjv2"]
+[ext_resource type="PackedScene" uid="uid://cge6pcpu61cu0" path="res://Scenes/Menus/Pause Menu/pause_menu.tscn" id="12_rku1e"]
+[ext_resource type="PackedScene" uid="uid://o0ylnto6fyv1" path="res://Scenes/Menus/scroll_label.tscn" id="13_nb51f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_v158k"]
+font = ExtResource("7_o5yvi")
+font_size = 32
+font_color = Color(1, 0.89411765, 0.47058824, 1)
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_color = Color(0.25882354, 0.14117648, 0.27058825, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h4fw4"]
+font = ExtResource("8_o5yvi")
+font_size = 8
+font_color = Color(1, 1, 0.92156863, 1)
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_color = Color(0.25882354, 0.14117648, 0.27058825, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rfjv2"]
+texture = ExtResource("11_rku1e")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5yvi"]
+bg_color = Color(0.56078434, 0.87058824, 0.3647059, 1)
+
+[node name="game" type="Node2D" unique_id=318710393]
+script = ExtResource("1_3dryh")
+note_scene = ExtResource("2_wowpa")
+bomb_scene = ExtResource("3_rku1e")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=494429226]
+z_index = -2
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0.3529412, 0.14901961, 0.36862746, 1)
+
+[node name="RhythmNotifier" type="Node" parent="." unique_id=1485865011 node_paths=PackedStringArray("audio_stream_player")]
+unique_name_in_owner = true
+script = ExtResource("3_i6g32")
+bpm = 150.0
+beat_length = 0.4
+audio_stream_player = NodePath("../AudioStreamPlayer")
+running = true
+metadata/_custom_type_script = "uid://dos3qhffr4v0a"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=927867457]
+autoplay = true
+bus = &"Music"
+
+[node name="BgShadow" type="Sprite2D" parent="." unique_id=2021131927]
+z_index = -1
+position = Vector2(160, 90)
+texture = ExtResource("11_o5yvi")
+
+[node name="notes_container" type="Node2D" parent="." unique_id=263445818]
+unique_name_in_owner = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=914420351]
+position = Vector2(160, 90)
+
+[node name="cut" parent="." unique_id=905884707 instance=ExtResource("9_h4fw4")]
+unique_name_in_owner = true
+z_index = 1
+
+[node name="Bg" type="Sprite2D" parent="." unique_id=178141967]
+z_index = 4
+position = Vector2(160, 90)
+texture = ExtResource("10_ldgsr")
+
+[node name="pause_menu" parent="." unique_id=796115068 instance=ExtResource("12_rku1e")]
+visible = false
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=926191271]
+
+[node name="rank_label" type="Label" parent="HUD" unique_id=188061000]
+unique_name_in_owner = true
+visible = false
+offset_left = 200.0
+offset_top = 145.0
+offset_right = 312.0
+offset_bottom = 167.0
+text = "PERFECT"
+label_settings = SubResource("LabelSettings_v158k")
+horizontal_alignment = 2
+
+[node name="time_label" type="Label" parent="HUD" unique_id=1831868829]
+unique_name_in_owner = true
+visible = false
+offset_left = 248.0
+offset_top = 169.0
+offset_right = 308.0
+offset_bottom = 176.0
+text = "1000ms"
+label_settings = SubResource("LabelSettings_h4fw4")
+horizontal_alignment = 2
+
+[node name="accuracy_label" type="Label" parent="HUD" unique_id=2036693633]
+unique_name_in_owner = true
+offset_left = 271.0
+offset_top = 4.0
+offset_right = 311.0
+offset_bottom = 11.0
+text = "100.0%"
+label_settings = SubResource("LabelSettings_h4fw4")
+horizontal_alignment = 2
+
+[node name="health_bar" type="ProgressBar" parent="HUD" unique_id=926094068]
+unique_name_in_owner = true
+offset_left = 304.0
+offset_top = 21.0
+offset_right = 310.0
+offset_bottom = 147.0
+theme_override_styles/background = SubResource("StyleBoxTexture_rfjv2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o5yvi")
+max_value = 4000.0
+value = 4000.0
+fill_mode = 3
+show_percentage = false
+
+[node name="song_info" type="VBoxContainer" parent="HUD" unique_id=1525114831]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0.3137255)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -155.0
+offset_top = -12.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("12_1phco")
+theme_override_constants/separation = 2
+
+[node name="song_name" parent="HUD/song_info" unique_id=922118309 instance=ExtResource("13_nb51f")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+scroll_horizontal = 104
+text = "Placeholder Song"
+
+[node name="song_author" parent="HUD/song_info" unique_id=1988390278 instance=ExtResource("13_nb51f")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+scroll_horizontal = 0
+text = "Song Author Placeholder"
+
+[node name="song_website" parent="HUD/song_info" unique_id=1890894979 instance=ExtResource("13_nb51f")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+scroll_horizontal = 55
+text = "www.placeholder.com"
+
+[node name="end_screen" parent="." unique_id=1956387762 instance=ExtResource("12_rfjv2")]
+unique_name_in_owner = true
+visible = false
+
+[connection signal="beat" from="RhythmNotifier" to="." method="_on_rhythm_notifier_beat"]
+[connection signal="value_changed" from="HUD/health_bar" to="." method="_on_health_bar_value_changed"]

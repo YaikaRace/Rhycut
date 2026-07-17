@@ -1,0 +1,17 @@
+[gd_resource type="Theme" format=3 uid="uid://obw7ojv663bq"]
+
+[ext_resource type="Texture2D" uid="uid://f7qcggi65xj2" path="res://Assets/UI Icons/line_edit.png" id="1_3lcwf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_spk5i"]
+texture = ExtResource("1_3lcwf")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+expand_margin_left = 2.0
+expand_margin_top = 1.0
+expand_margin_right = 2.0
+expand_margin_bottom = 1.0
+
+[resource]
+LineEdit/styles/normal = SubResource("StyleBoxTexture_spk5i")
