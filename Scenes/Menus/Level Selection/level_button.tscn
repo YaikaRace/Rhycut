@@ -52,12 +52,13 @@ alignment = 1
 [node name="level_name" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=922118309 instance=ExtResource("6_5sqmh")]
 unique_name_in_owner = true
 layout_mode = 2
-scroll_horizontal = 21
+scroll_horizontal = 36
 text = "Test map by YaikaRace"
 
 [node name="song_name" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1489112508 instance=ExtResource("6_5sqmh")]
 unique_name_in_owner = true
 layout_mode = 2
+scroll_horizontal = 0
 color = Color(0.7607843, 0.7607843, 0.81960785, 1)
 text = "\"Song\" by Artist"
 

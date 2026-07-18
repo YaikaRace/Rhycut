@@ -24,7 +24,7 @@ func _ready() -> void:
 	global_position = resource.initial_position
 	if not editor:
 		lifetime.start()
-	if note_indicator:
+	if note_indicator and not GameState.is_modifier_active("no_indicators"):
 		indicator = sprite.duplicate()
 		indicator.show_behind_parent = true
 		#indicator.scale = Vector2(1.5, 1.5)
@@ -49,6 +49,9 @@ func _ready() -> void:
 	shadow.global_position = sprite.global_position + Vector2(3, 3)
 
 func _process(delta: float) -> void:
+	global_position = calculate_current_position()
+	sprite.rotation = calculate_current_rotation()
+	shadow.rotation = sprite.rotation
 	if indicator:
 		indicator.global_position = gravity_component.get_position_vector(resource.initial_position, resource.initial_velocity, resource.time_to_peak)
 		indicator.global_rotation = gravity_component.get_rotation_by_time(resource.initial_angular_velocity, resource.time_to_peak)
@@ -64,10 +67,10 @@ func _process(delta: float) -> void:
 		else:
 			indicator.show()
 
-func _physics_process(delta: float) -> void:
-	global_position = calculate_current_position()
-	sprite.rotation = calculate_current_rotation()
-	shadow.rotation = sprite.rotation
+#func _physics_process(delta: float) -> void:
+	#global_position = calculate_current_position()
+	#sprite.rotation = calculate_current_rotation()
+	#shadow.rotation = sprite.rotation
 
 func cut() -> void:
 	return

@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://wpt6e0qude7i"]
+
+[ext_resource type="Theme" uid="uid://c08u4scde3g3e" path="res://Resources/Themes/main.tres" id="1_t16mm"]
+[ext_resource type="Script" uid="uid://b82j3jtdk7gh0" path="res://Scripts/Menus/toast.gd" id="3_7o3ur"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t16mm"]
+load_path = "res://.godot/imported/menu-button2.png-fa0bed8e188d241749fc02e8849d6bd6.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7o3ur"]
+resource_local_to_scene = true
+texture = SubResource("CompressedTexture2D_t16mm")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[node name="toast" type="PanelContainer" unique_id=717210734]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_right = 64.0
+offset_bottom = 32.0
+grow_horizontal = 2
+pivot_offset = Vector2(64, 0)
+theme = ExtResource("1_t16mm")
+theme_override_styles/panel = SubResource("StyleBoxTexture_7o3ur")
+script = ExtResource("3_7o3ur")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=819493253]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=404097395]
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=585917806]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=200076487]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=615497635]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Title"
+
+[node name="info" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=979976780]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7607843, 0.7607843, 0.81960785, 1)
+text = "Info"

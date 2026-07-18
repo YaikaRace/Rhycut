@@ -126,6 +126,15 @@ text = "100.0%"
 label_settings = SubResource("LabelSettings_h4fw4")
 horizontal_alignment = 2
 
+[node name="fps" type="Label" parent="HUD" unique_id=1167526588]
+unique_name_in_owner = true
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 63.0
+offset_bottom = 10.0
+text = "0 fps"
+label_settings = SubResource("LabelSettings_h4fw4")
+
 [node name="health_bar" type="ProgressBar" parent="HUD" unique_id=926094068]
 unique_name_in_owner = true
 offset_left = 304.0
@@ -167,19 +176,24 @@ text = "Placeholder Song"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
-scroll_horizontal = 0
+scroll_horizontal = 9
 text = "Song Author Placeholder"
 
 [node name="song_website" parent="HUD/song_info" unique_id=1890894979 instance=ExtResource("13_nb51f")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
-scroll_horizontal = 55
+scroll_horizontal = 0
 text = "www.placeholder.com"
 
 [node name="end_screen" parent="." unique_id=1956387762 instance=ExtResource("12_rfjv2")]
 unique_name_in_owner = true
 visible = false
 
+[node name="fps_timer" type="Timer" parent="." unique_id=356872979]
+wait_time = 0.5
+autostart = true
+
 [connection signal="beat" from="RhythmNotifier" to="." method="_on_rhythm_notifier_beat"]
 [connection signal="value_changed" from="HUD/health_bar" to="." method="_on_health_bar_value_changed"]
+[connection signal="timeout" from="fps_timer" to="." method="_on_fps_timer_timeout"]

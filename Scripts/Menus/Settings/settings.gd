@@ -6,12 +6,18 @@ extends Control
 @onready var video_settings: VBoxContainer = %video_settings
 @onready var misc_settings: VBoxContainer = %misc_settings
 @onready var warning: Label = %warning
-@onready var fullscreen: CheckButton = %fullscreen
 
 func _ready() -> void:
 	load_settings()
 	if popup_mode:
-		get_parent().about_to_popup.connect(load_settings)
+		get_parent().about_to_popup.connect(reload_settings)
+
+func reload_settings() -> void:
+	for child in video_settings.get_children():
+		child.queue_free()
+	for child in misc_settings.get_children():
+		child.queue_free()
+	load_settings()
 
 func load_settings() -> void:
 	warning.hide()
@@ -20,11 +26,27 @@ func load_settings() -> void:
 		if node is VolumeController:
 			node.set_volume(Settings.audio[k] * 100.0)
 	for k in Settings.video:
-		var node = video_settings.find_child(k.to_lower())
+		var value = Settings.video[k]
+		if not value is bool:
+			continue
+		var node = CheckButton.new()
+		node.name = k
+		node.text = k.capitalize()
+		video_settings.add_child(node)
+		node.set_meta("key", k)
+		node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		if node is CheckButton:
 			node.set_pressed_no_signal(Settings.video[k])
 	for k in Settings.misc:
-		var node = misc_settings.find_child(k.to_lower())
+		var value = Settings.misc[k]
+		if not value is bool:
+			continue
+		var node = CheckButton.new()
+		node.name = k
+		node.text = k.capitalize()
+		misc_settings.add_child(node)
+		node.set_meta("key", k)
+		node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		if node is CheckButton:
 			node.set_pressed_no_signal(Settings.misc[k])
 
@@ -39,10 +61,12 @@ func _on_apply_pressed() -> void:
 		if child is VolumeController:
 			Settings.audio[child.bus] = child.linear_volume
 	for child in video_settings.get_children():
+		var key = child.get_meta("key", "")
 		if child is CheckButton:
-			Settings.video[child.name] = child.button_pressed
+			Settings.video[key] = child.button_pressed
 	for child in misc_settings.get_children():
+		var key = child.get_meta("key", "")
 		if child is CheckButton:
-			Settings.misc[child.name] = child.button_pressed
+			Settings.misc[key] = child.button_pressed
 	Settings.save_settings()
 	Settings.apply_settings()

@@ -28,6 +28,7 @@ GameState="*uid://cdiro4744cbxx"
 Constants="*uid://cv3gh45u6jsfb"
 Settings="*uid://c6ro372h1lgfm"
 AudioHelper="*uid://chwhmavc311c6"
+Toast="*uid://cccpdvxyqcl3m"
 
 [display]
 
@@ -36,6 +37,7 @@ window/size/viewport_height=180
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
 
 [editor_plugins]
 

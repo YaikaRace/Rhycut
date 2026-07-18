@@ -19,6 +19,7 @@ extends Node2D
 @onready var song_author: ScrollLabel = %song_author
 @onready var song_website: ScrollLabel = %song_website
 @onready var song_info: VBoxContainer = %song_info
+@onready var fps: Label = %fps
 
 var notes: Array[NoteResource] = []
 var accuracy: float = 100.0
@@ -42,23 +43,30 @@ func _ready() -> void:
 	if not beatmap.updated:
 		beatmap.update_all_notes()
 	notes = beatmap.notes.duplicate()
+	if GameState.is_modifier_active("x2"):
+		audio_stream_player.pitch_scale = 2.0
+		var idx = AudioServer.get_bus_index("Music")
+		var pitch_effect = AudioServer.get_bus_effect(idx, 0) as AudioEffectPitchShift
+		pitch_effect.pitch_scale = 0.5
 	audio_stream_player.play(GameState.current_song_position)
 	song_info.show()
 	if not Settings.misc.song_info:
 		song_info.hide()
+	if not Settings.misc.fps_counter:
+		fps.hide()
+
+func _physics_process(delta: float) -> void:
+	queue_redraw()
 
 func _process(delta: float) -> void:
-	queue_redraw()
 	if not running:
 		return
 	accuracy_label.text = str(accuracy).pad_decimals(1) + "%"
 	GameState.current_song_position = audio_stream_player.get_playback_position()
 	var pos = audio_stream_player.get_playback_position() + AudioServer.get_time_since_last_mix()
 	for note in notes:
-		#printt(note.time - note.time_to_peak, pos, pos - 0.007, pos + 0.007)
 		var note_spawn_time = note.time - note.time_to_peak - 1.5
 		if pos >= note_spawn_time:
-			#printt(note.time - note.time_to_peak, pos, pos - 0.007, pos + 0.007)
 			if note.type == 0:
 				var ins = note_scene.instantiate()
 				ins.resource = note
@@ -153,7 +161,7 @@ func finish_game() -> void:
 	running = false
 
 func _on_rhythm_notifier_beat(current_beat: int) -> void:
-	if Settings.video.cam_bpm:
+	if Settings.video.cam_pulse_to_bpm:
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
 		$Camera2D.zoom = Vector2(1.01, 1.01)
 		tween.tween_property($Camera2D, "zoom", Vector2.ONE, 0.2)
@@ -193,3 +201,6 @@ func _draw() -> void:
 func _on_health_bar_value_changed(value: float) -> void:
 	if value == 0:
 		finish_game()
+
+func _on_fps_timer_timeout() -> void:
+	fps.text = str(floori(1 / get_process_delta_time())) + " fps"

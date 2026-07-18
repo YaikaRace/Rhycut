@@ -7,13 +7,16 @@ var audio = {
 }
 
 var video = {
-	"cam_bpm": true,
+	"cam_pulse_to_bpm": true,
 	"sprite_scaling": true,
-	"fullscreen": false
+	"fullscreen": false,
+	"v_sync": true
 }
 
 var misc = {
-	"song_info": false
+	"fps_counter": false,
+	"song_info": false,
+	"level_music_in_selection": true
 }
 
 func _ready() -> void:
@@ -55,3 +58,7 @@ func apply_settings() -> void:
 		get_window().mode = Window.MODE_FULLSCREEN
 	elif not video.fullscreen:
 		get_window().mode = Window.MODE_WINDOWED
+	if video.v_sync:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	elif not video.v_sync:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)

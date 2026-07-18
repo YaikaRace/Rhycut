@@ -60,6 +60,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				open_level(level_path)
 				return
 			pressed.emit(metadata)
+			grab_focus()
 			focused = true
 
 func open_level(path: String) -> void:

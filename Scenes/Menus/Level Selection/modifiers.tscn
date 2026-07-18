@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bavmniwavux2k"]
+
+[ext_resource type="Theme" uid="uid://c08u4scde3g3e" path="res://Resources/Themes/main.tres" id="1_y1v8v"]
+[ext_resource type="Script" uid="uid://don5ct1ow6ni5" path="res://Scripts/Menus/Level Selection/modifiers.gd" id="2_40pn7"]
+
+[node name="modifiers" type="AcceptDialog" unique_id=1544339664]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(200, 80)
+visible = true
+unresizable = true
+borderless = true
+transparent = true
+theme = ExtResource("1_y1v8v")
+ok_button_text = "Close"
+script = ExtResource("2_40pn7")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=788190857]
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 197.0
+offset_bottom = 46.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="mod_container" type="GridContainer" parent="MarginContainer" unique_id=141963284]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 3
+
+[node name="no_indicators" type="Button" parent="MarginContainer/mod_container" unique_id=1372532275]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "No Indicators"
+
+[node name="x2" type="Button" parent="MarginContainer/mod_container" unique_id=200595266]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "x2 Speed"
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
