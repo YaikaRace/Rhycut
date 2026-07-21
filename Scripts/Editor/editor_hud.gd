@@ -77,7 +77,10 @@ func song_seek(position: float) -> void:
 func save_file(path: String) -> void:
 	if not OS.has_feature("web"):
 		working_path = path
-	var f = FileAccess.open(path, FileAccess.WRITE)
+	var f = FileAccess.open(ProjectSettings.globalize_path(path), FileAccess.WRITE)
+	if not f:
+		Toast.error("Error saving BeatMap", "try again later")
+		return
 	f.store_var(beatmap.metadata)
 	f.store_var(beatmap.get_save_data())
 	f.close()
@@ -102,8 +105,9 @@ func save_file(path: String) -> void:
 			document.body.removeChild(a);
 			URL.revokeObjectURL(url);
 		})("%s", "%s");
-		""" % [base64, "beatmap.rcbm"]
+		""" % [base64, "%s.rcbm" % beatmap.metadata.name]
 		JavaScriptBridge.eval(js_code)
+	Toast.show("Saved!", "Map saved successfully")
 
 func _on_mode_button_toggled(toggled_on: bool, button: Button) -> void:
 	if toggled_on:
@@ -164,9 +168,10 @@ func _on_save_level_pressed() -> void:
 		metadata_form.popup_centered()
 	elif working_path:
 		if OS.has_feature("web"):
-			save_file("user://temp.rcbm")
+			save_file("user://%s.rcbm" % beatmap.metadata.name)
 		else:
 			save_file(working_path)
+		Toast.show("Saved!", "Map saved successfully")
 
 func _on_save_dialog_file_selected(path: String) -> void:
 	save_file(path)
@@ -185,12 +190,14 @@ func _on_load_dialog_file_selected(path: String) -> void:
 	var bm = BeatMap.new()
 	var err = bm.set_metadata(metadata)
 	if err != OK:
+		Toast.error("Can't Load BeatMap", "BeatMap version is invalid")
 		return
 	print(data.audio_type)
 	bpm_box.value = metadata.bpm
 	metadata_form.load_data(metadata)
 	err = bm.parse_data(data)
 	if err != OK:
+		Toast.error("Can't Load BeatMap", "BeatMap file is invalid")
 		return
 	beatmap_loaded.emit(bm)
 	f.close()
@@ -219,7 +226,10 @@ func _on_save_data_finished(data: Dictionary) -> void:
 	current_metadata = data
 	beatmap.metadata = data
 	if OS.has_feature("web"):
-		save_file("user://temp.rcbm")
+		save_file("user://%s.rcbm" % data.name)
+		return
+	if OS.get_name() == "Android":
+		save_file("user://beatmaps/".path_join(data.name + ".rcbm"))
 		return
 	save_dialog.popup_centered()
 

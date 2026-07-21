@@ -10,6 +10,7 @@ const LEVEL_BUTTON = preload("uid://dsm3cf3vr0c4c")
 @onready var audio_player: AudioStreamPlayer = %audio_player
 @onready var modifiers_popup: AcceptDialog = %modifiers_popup
 @onready var manage_popup: AcceptDialog = %manage
+@onready var share: Share = %Share
 
 var current_beatmap_path = ""
 
@@ -94,3 +95,6 @@ func _on_manage_remove_beatmap() -> void:
 		Toast.error("Error removing BeatMap", "try again later")
 	else:
 		Toast.show("BeatMap removed", "BeatMap removed successfully")
+
+func _on_manage_share() -> void:
+	share.share_file(current_beatmap_path, "application/octet-stream", "Check my Rhycut BeatMap", "", "")

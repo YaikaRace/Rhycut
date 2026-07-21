@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Rhycut"
-config/version="1.0.0"
+config/version="0.1.0"
 run/main_scene="uid://dh8uc0b1sduu3"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/show_image=false
@@ -41,7 +41,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/html5_file_dialog/plugin.cfg")
+enabled=PackedStringArray("res://addons/SharePlugin/plugin.cfg", "res://addons/html5_file_dialog/plugin.cfg")
 
 [input]
 

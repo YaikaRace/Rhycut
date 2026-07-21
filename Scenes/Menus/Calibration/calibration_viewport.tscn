@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ufldjm5eawdp"]
+
+[ext_resource type="Script" uid="uid://bkdxd1vfwefpr" path="res://Scripts/Menus/Calibration/calibration_viewport.gd" id="1_e7r6r"]
+[ext_resource type="PackedScene" uid="uid://dhenc2eh0i0lo" path="res://Scenes/cut.tscn" id="2_c11xh"]
+[ext_resource type="AudioStream" uid="uid://ch6e6nuo7qfsy" path="res://Assets/SFX/metronome 120bpm.wav" id="3_5acpl"]
+
+[node name="calibration_viewport" type="Node2D" unique_id=463417782]
+script = ExtResource("1_e7r6r")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1924611130]
+z_index = -2
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0.3529412, 0.14901961, 0.36862746, 1)
+
+[node name="cut" parent="." unique_id=905884707 instance=ExtResource("2_c11xh")]
+unique_name_in_owner = true
+z_index = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=359213321]
+stream = ExtResource("3_5acpl")
+
+[node name="notes_container" type="Node2D" parent="." unique_id=2111389974]
+unique_name_in_owner = true
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

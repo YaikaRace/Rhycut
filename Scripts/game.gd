@@ -25,6 +25,7 @@ var notes: Array[NoteResource] = []
 var accuracy: float = 100.0
 var health: int = 4000
 var running = true
+var offset = Settings.calibration.offset
 
 func _ready() -> void:
 	if not beatmap:
@@ -34,12 +35,13 @@ func _ready() -> void:
 	health_bar.max_value = max_health
 	health_bar.value = max_health
 	audio_stream_player.stream = beatmap.audio
-	song_name.text = beatmap.metadata.song_name
-	song_author.text = "by " + beatmap.metadata.song_author
-	if beatmap.metadata.has("song_website"):
-		song_website.text = beatmap.metadata.song_website
-	else:
-		song_website.hide()
+	if not editor:
+		song_name.text = beatmap.metadata.song_name
+		song_author.text = "by " + beatmap.metadata.song_author
+		if beatmap.metadata.has("song_website"):
+			song_website.text = beatmap.metadata.song_website
+		else:
+			song_website.hide()
 	if not beatmap.updated:
 		beatmap.update_all_notes()
 	notes = beatmap.notes.duplicate()
@@ -62,10 +64,11 @@ func _process(delta: float) -> void:
 	if not running:
 		return
 	accuracy_label.text = str(accuracy).pad_decimals(1) + "%"
-	GameState.current_song_position = audio_stream_player.get_playback_position()
-	var pos = audio_stream_player.get_playback_position() + AudioServer.get_time_since_last_mix()
-	for note in notes:
-		var note_spawn_time = note.time - note.time_to_peak - 1.5
+	GameState.current_song_position = audio_stream_player.get_playback_position() + offset
+	var pos = audio_stream_player.get_playback_position() + AudioServer.get_time_since_last_mix() + offset
+	for i in range(notes.size() - 1, -1, -1):
+		var note = notes[i]
+		var note_spawn_time = note.time - note.time_to_peak
 		if pos >= note_spawn_time:
 			if note.type == 0:
 				var ins = note_scene.instantiate()

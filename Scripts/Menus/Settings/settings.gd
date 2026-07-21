@@ -6,10 +6,12 @@ extends Control
 @onready var video_settings: VBoxContainer = %video_settings
 @onready var misc_settings: VBoxContainer = %misc_settings
 @onready var warning: Label = %warning
+@onready var calibrate: Button = %calibrate
 
 func _ready() -> void:
 	load_settings()
 	if popup_mode:
+		calibrate.hide()
 		get_parent().about_to_popup.connect(reload_settings)
 
 func reload_settings() -> void:
@@ -27,14 +29,14 @@ func load_settings() -> void:
 			node.set_volume(Settings.audio[k] * 100.0)
 	for k in Settings.video:
 		var value = Settings.video[k]
-		if not value is bool:
-			continue
-		var node = CheckButton.new()
-		node.name = k
-		node.text = k.capitalize()
-		video_settings.add_child(node)
-		node.set_meta("key", k)
-		node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		var node
+		if value is bool:
+			node = CheckButton.new()
+			node.name = k
+			node.text = k.capitalize()
+			video_settings.add_child(node)
+			node.set_meta("key", k)
+			node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		if node is CheckButton:
 			node.set_pressed_no_signal(Settings.video[k])
 	for k in Settings.misc:
@@ -45,6 +47,7 @@ func load_settings() -> void:
 		node.name = k
 		node.text = k.capitalize()
 		misc_settings.add_child(node)
+		misc_settings.move_child(node, misc_settings.get_child_count() - 2)
 		node.set_meta("key", k)
 		node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		if node is CheckButton:
@@ -70,3 +73,9 @@ func _on_apply_pressed() -> void:
 			Settings.misc[key] = child.button_pressed
 	Settings.save_settings()
 	Settings.apply_settings()
+
+func _on_calibrate_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/Menus/Calibration/calibration.tscn")
+
+func _on_restore_beatmaps_pressed() -> void:
+	Globals.restore_starter_beatmaps()

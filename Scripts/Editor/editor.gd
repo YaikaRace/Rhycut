@@ -115,7 +115,10 @@ func _on_editor_hud_pause_music() -> void:
 		note.paused = true
 
 func _on_editor_hud_play_music() -> void:
-	song_player.play(GameState.current_song_position)
+	var pos = GameState.current_song_position + AudioServer.get_time_since_last_mix()
+	if OS.has_feature("web"):
+		pos += 0.06
+	song_player.play(max(0, pos))
 	song_player.stream_paused = false
 	for note in notes_container.get_children():
 		note.paused = false

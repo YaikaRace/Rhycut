@@ -9,8 +9,11 @@ var audio = {
 var video = {
 	"cam_pulse_to_bpm": true,
 	"sprite_scaling": true,
-	"fullscreen": false,
-	"v_sync": true
+	"v_sync": true,
+}
+
+var video_pc_only = {
+	"fullscreen": false
 }
 
 var misc = {
@@ -19,13 +22,23 @@ var misc = {
 	"level_music_in_selection": true
 }
 
+var calibration = {
+	"offset": 0.0
+}
+
 func _ready() -> void:
+	video.fps_limit = DisplayServer.screen_get_refresh_rate()
+	merge_settings()
 	load_settings()
 	apply_settings()
 	if OS.get_name() == "Android" and not video.fullscreen:
 		video.fullscreen = true
 		save_settings()
 		apply_settings()
+
+func merge_settings() -> void:
+	if OS.get_name() != "Android":
+		video.merge(video_pc_only)
 
 func save_settings() -> void:
 	var cfg = ConfigFile.new()
@@ -35,6 +48,8 @@ func save_settings() -> void:
 		cfg.set_value("Video", k, video[k])
 	for k in misc:
 		cfg.set_value("Misc", k, misc[k])
+	for k in calibration:
+		cfg.set_value("Calibration", k, calibration[k])
 	cfg.save("user://settings/settings.cfg")
 
 func load_settings() -> void:
@@ -62,3 +77,4 @@ func apply_settings() -> void:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	elif not video.v_sync:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	Engine.max_fps = video.fps_limit

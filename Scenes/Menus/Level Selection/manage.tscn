@@ -8,7 +8,7 @@ transparent_bg = true
 canvas_item_default_texture_filter = 0
 oversampling_override = 1.0
 initial_position = 1
-size = Vector2i(177, 116)
+size = Vector2i(176, 116)
 visible = true
 unresizable = true
 borderless = true
@@ -20,7 +20,7 @@ script = ExtResource("2_gdgpy")
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1337315866]
 offset_left = 3.0
 offset_top = 3.0
-offset_right = 174.0
+offset_right = 173.0
 offset_bottom = 82.0
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
@@ -33,15 +33,21 @@ layout_mode = 2
 [node name="open_folder" type="Button" parent="MarginContainer/VBoxContainer" unique_id=948664986]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Open Beatmaps Folder"
+text = "Open BeatMaps Folder"
 
 [node name="import_file" type="Button" parent="MarginContainer/VBoxContainer" unique_id=700347781]
 layout_mode = 2
-text = "Import Beatmap File"
+text = "Import BeatMap File"
 
 [node name="remove_beatmap" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1977368695]
 layout_mode = 2
-text = "Remove Selected Beatmap"
+text = "Remove Selected BeatMap"
+
+[node name="share_beatmap" type="Button" parent="MarginContainer/VBoxContainer" unique_id=705443860]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Share Selected BeatMap"
 
 [node name="import_dialog" type="FileDialog" parent="." unique_id=2116681929]
 unique_name_in_owner = true
@@ -56,4 +62,5 @@ use_native_dialog = true
 [connection signal="pressed" from="MarginContainer/VBoxContainer/open_folder" to="." method="_on_open_folder_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/import_file" to="." method="_on_import_file_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/remove_beatmap" to="." method="_on_remove_beatmap_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/share_beatmap" to="." method="_on_share_beatmap_pressed"]
 [connection signal="file_selected" from="import_dialog" to="." method="_on_import_dialog_file_selected"]

@@ -13,7 +13,7 @@ signal finished(data: Dictionary)
 @onready var warning: Label = %warning
 @onready var map_version_edit: LineEdit = %map_version_edit
 
-var icon: Image = Image.load_from_file("res://Assets/Sprites/music-note.png")
+var icon: Image = preload("res://Assets/Sprites/music-note.png").get_image()
 
 func _ready() -> void:
 	hide()

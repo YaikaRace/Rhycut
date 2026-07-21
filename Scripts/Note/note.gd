@@ -17,6 +17,9 @@ func cut() -> void:
 	cuts.global_position = global_position
 	cuts.play()
 	cuts.global_rotation = global_rotation
+	if editor:
+		hide()
+		return
 	queue_free()
 
 func generate_particles() -> void:
@@ -27,7 +30,6 @@ func generate_particles() -> void:
 	ins.start(sprite.global_rotation_degrees)
 
 func screen_exited() -> void:
-	if editor: return
 	if GameState.current_song_position > resource.time:
 		miss.emit()
 

@@ -1,13 +1,16 @@
 extends AcceptDialog
 
 signal remove_beatmap
+signal share
 
 @onready var open_folder: Button = %open_folder
 @onready var import_dialog: FileDialog = %import_dialog
+@onready var share_beatmap: Button = %share_beatmap
 
 func _ready() -> void:
 	if OS.get_name() == "Android":
 		open_folder.hide()
+		share_beatmap.show()
 
 func _on_open_folder_pressed() -> void:
 	OS.shell_open(ProjectSettings.globalize_path("user://beatmaps"))
@@ -25,3 +28,6 @@ func _on_import_dialog_file_selected(path: String) -> void:
 		Toast.error("Error importing BeatMap", "try again later")
 	else:
 		Toast.show("BeatMap Imported", "BeatMap imported successfully")
+
+func _on_share_beatmap_pressed() -> void:
+	share.emit()

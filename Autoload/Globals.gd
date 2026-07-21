@@ -4,6 +4,7 @@ var note_gravity = 5.0
 var current_dropped = ""
 
 func _ready() -> void:
+	get_tree().quit_on_go_back = false
 	var dir = DirAccess.open("user://")
 	if not dir.dir_exists("settings"):
 		dir.make_dir("settings")
@@ -16,6 +17,13 @@ func _ready() -> void:
 func copy_starter_beatmaps_first_time() -> void:
 	var dir = DirAccess.open("res://Starter Beatmaps")
 	for file in dir.get_files():
+		dir.copy("res://Starter Beatmaps".path_join(file), "user://beatmaps/".path_join(file))
+
+func restore_starter_beatmaps() -> void:
+	var dir = DirAccess.open("res://Starter Beatmaps")
+	for file in dir.get_files():
+		if FileAccess.file_exists("user://beatmaps/".path_join(file)):
+			DirAccess.remove_absolute(ProjectSettings.globalize_path("user://beatmaps/".path_join(file)))
 		dir.copy("res://Starter Beatmaps".path_join(file), "user://beatmaps/".path_join(file))
 
 func copy_starter_beatmaps() -> void:
@@ -43,3 +51,10 @@ func _on_files_dropped(files: PackedStringArray) -> void:
 	f.copy(file, "user://beatmaps/" + file.get_file())
 	current_dropped = file.get_file()
 	get_tree().change_scene_to_file("res://Scenes/Menus/Level Selection/level_selection.tscn")
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		Input.action_press("ui_cancel")
+		Input.action_release("ui_cancel")
+		Input.action_press("pause_game")
+		Input.action_release("pause_game")

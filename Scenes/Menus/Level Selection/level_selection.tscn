@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://fhxlnngqykfr" path="res://Assets/Main Menu/song-info-panel.png" id="3_vy7yi"]
 [ext_resource type="PackedScene" uid="uid://bavmniwavux2k" path="res://Scenes/Menus/Level Selection/modifiers.tscn" id="5_npx3t"]
 [ext_resource type="PackedScene" uid="uid://cft1qypic18x3" path="res://Scenes/Menus/Level Selection/manage.tscn" id="6_xjco6"]
+[ext_resource type="Script" uid="uid://v8b2l0poboqy" path="res://addons/SharePlugin/Share.gd" id="7_188v1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_npx3t"]
 texture = ExtResource("3_vy7yi")
@@ -130,6 +131,11 @@ visible = false
 unique_name_in_owner = true
 visible = false
 
+[node name="Share" type="Node" parent="." unique_id=271347065]
+unique_name_in_owner = true
+script = ExtResource("7_188v1")
+metadata/_custom_type_script = "uid://v8b2l0poboqy"
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/open_folder_button" to="." method="_on_open_folder_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/modifiers" to="." method="_on_modifiers_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/manage" to="." method="_on_manage_pressed"]
@@ -137,3 +143,4 @@ visible = false
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/back_button" to="." method="_on_back_button_pressed"]
 [connection signal="timeout" from="refresh_timer" to="." method="_on_refresh_timer_timeout"]
 [connection signal="remove_beatmap" from="manage" to="." method="_on_manage_remove_beatmap"]
+[connection signal="share" from="manage" to="." method="_on_manage_share"]

@@ -1,3 +1,3 @@
 extends Node
 
-const BEATMAP_VERSION = 1.0
+const BEATMAP_VERSION = "0.1"
