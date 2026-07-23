@@ -50,7 +50,8 @@ func _ready() -> void:
 		var idx = AudioServer.get_bus_index("Music")
 		var pitch_effect = AudioServer.get_bus_effect(idx, 0) as AudioEffectPitchShift
 		pitch_effect.pitch_scale = 0.5
-	audio_stream_player.play(GameState.current_song_position)
+	AudioHelper.start_game()
+	audio_stream_player.play(AudioHelper.time)
 	song_info.show()
 	if not Settings.misc.song_info:
 		song_info.hide()
@@ -64,8 +65,8 @@ func _process(delta: float) -> void:
 	if not running:
 		return
 	accuracy_label.text = str(accuracy).pad_decimals(1) + "%"
-	GameState.current_song_position = audio_stream_player.get_playback_position() + offset
-	var pos = audio_stream_player.get_playback_position() + AudioServer.get_time_since_last_mix() + offset
+	AudioHelper.current_playback_position = audio_stream_player.get_playback_position()
+	var pos = AudioHelper.time + offset
 	for i in range(notes.size() - 1, -1, -1):
 		var note = notes[i]
 		var note_spawn_time = note.time - note.time_to_peak

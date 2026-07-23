@@ -22,19 +22,20 @@ func _ready() -> void:
 	GameState.song_length = audio_length
 	audio_stream_player.play()
 	generate_note(2)
+	AudioHelper.start_game()
 
 func miss(note: Note) -> void:
 	note.queue_free()
 
 func _process(delta: float) -> void:
 	queue_redraw()
-	var pos = audio_stream_player.get_playback_position() + AudioServer.get_time_since_last_mix() + offset
 	var current = audio_stream_player.get_playback_position()
 	if current < last_pos:
 		loops += 1
 	last_pos = current
-	time = loops * audio_length + pos
-	GameState.current_song_position = time
+	AudioHelper.current_playback_position = loops * audio_length + current
+	var pos = AudioHelper.time + offset
+	time = pos
 	while time >= next_note_time:
 		next_note_time += interval
 		generate_note(next_note_time)

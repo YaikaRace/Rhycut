@@ -27,14 +27,9 @@ var calibration = {
 }
 
 func _ready() -> void:
-	video.fps_limit = DisplayServer.screen_get_refresh_rate()
 	merge_settings()
 	load_settings()
 	apply_settings()
-	if OS.get_name() == "Android" and not video.fullscreen:
-		video.fullscreen = true
-		save_settings()
-		apply_settings()
 
 func merge_settings() -> void:
 	if OS.get_name() != "Android":
@@ -69,12 +64,14 @@ func apply_settings() -> void:
 		get_window().content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
 	elif not video.sprite_scaling:
 		get_window().content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
-	if video.fullscreen:
-		get_window().mode = Window.MODE_FULLSCREEN
-	elif not video.fullscreen:
-		get_window().mode = Window.MODE_WINDOWED
 	if video.v_sync:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	elif not video.v_sync:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-	Engine.max_fps = video.fps_limit
+	if OS.get_name() == "Android":
+		get_window().mode = Window.MODE_FULLSCREEN
+		return
+	if video.fullscreen:
+		get_window().mode = Window.MODE_FULLSCREEN
+	elif not video.fullscreen:
+		get_window().mode = Window.MODE_WINDOWED

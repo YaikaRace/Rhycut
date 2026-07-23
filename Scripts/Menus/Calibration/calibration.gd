@@ -35,4 +35,5 @@ func _on_apply_pressed() -> void:
 	Settings.calibration.offset = current_offset
 	Settings.save_settings()
 	GameState.reset_state()
+	AudioHelper.stop_game()
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")

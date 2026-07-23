@@ -3,7 +3,7 @@ class_name Note extends Item
 @onready var sfx: AudioStreamPlayer = %sfx
 
 func cut() -> void:
-	var current_time = GameState.current_song_position + AudioServer.get_time_since_last_mix()
+	var current_time = AudioHelper.time
 	printt(current_time, resource.time)
 	cut_time.emit(current_time - resource.time)
 	if current_time >= resource.time + 0.25 or current_time <= resource.time - 0.25:
@@ -30,7 +30,7 @@ func generate_particles() -> void:
 	ins.start(sprite.global_rotation_degrees)
 
 func screen_exited() -> void:
-	if GameState.current_song_position > resource.time:
+	if AudioHelper.time > resource.time:
 		miss.emit()
 
 func _add_sfx() -> void:

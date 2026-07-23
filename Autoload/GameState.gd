@@ -8,8 +8,7 @@ var modifiers = []
 
 func reset_state() -> void:
 	current_beatmap = null
-	current_song_position = 0.0
-	song_length = 0.0
+	reset_level()
 
 func reset_level() -> void:
 	current_song_position = 0.0

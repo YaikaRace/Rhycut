@@ -40,8 +40,8 @@ func _ready() -> void:
 		button.toggled.connect(_on_mode_button_toggled.bind(button))
 
 func _process(delta: float) -> void:
-	song_seek(GameState.current_song_position / GameState.song_length)
-	change_position_label(GameState.current_song_position)
+	song_seek(AudioHelper.time / GameState.song_length)
+	change_position_label(AudioHelper.time)
 	hide_buttons()
 
 func hide_buttons() -> void:
@@ -129,7 +129,7 @@ func _on_play_pause_toggled(toggled_on: bool) -> void:
 		play_pause.get_child(1).show()
 		pause_music.emit()
 		song_position_bar.value = song_position_bar.value
-		GameState.current_song_position = song_position_bar.value * GameState.song_length
+		AudioHelper.time = song_position_bar.value * GameState.song_length
 		return
 	play_pause.get_child(1).hide()
 	play_pause.get_child(0).show()
@@ -161,7 +161,8 @@ func _on_stop_test_pressed() -> void:
 	test_window.get_child(0).queue_free()
 	test_window.hide()
 	song_position_bar.value = song_position_bar.value
-	GameState.current_song_position = song_position_bar.value * GameState.song_length
+	AudioHelper.time = song_position_bar.value * GameState.song_length
+	AudioHelper.stop_game()
 
 func _on_save_level_pressed() -> void:
 	if not current_metadata:

@@ -56,9 +56,7 @@ func _process(delta: float) -> void:
 		indicator.global_position = gravity_component.get_position_vector(resource.initial_position, resource.initial_velocity, resource.time_to_peak)
 		indicator.global_rotation = gravity_component.get_rotation_by_time(resource.initial_angular_velocity, resource.time_to_peak)
 		var starting_time = resource.time - resource.time_to_peak
-		var current_time = GameState.current_song_position + AudioServer.get_time_since_last_mix()
-		if paused:
-			current_time = GameState.current_song_position
+		var current_time = AudioHelper.time
 		var remapped = remap(current_time, starting_time, resource.time, 2.0, 1.0)
 		var clamped = clampf(remapped, 1.0, 2.0)
 		indicator.scale = Vector2(clamped, clamped)
@@ -87,9 +85,8 @@ func calculate_current_position() -> Vector2:
 	return gravity_component.get_position_vector(resource.initial_position, resource.initial_velocity, time_elapsed)
 
 func _get_synced_time() -> float:
-	var time_elapsed = GameState.current_song_position + AudioServer.get_time_since_last_mix() - (resource.time - resource.time_to_peak)
-	if paused:
-		time_elapsed = GameState.current_song_position - (resource.time - resource.time_to_peak)
+	var time = AudioHelper.time
+	var time_elapsed = time - (resource.time - resource.time_to_peak)
 	time_elapsed = max(time_elapsed, 0)
 	return time_elapsed
 

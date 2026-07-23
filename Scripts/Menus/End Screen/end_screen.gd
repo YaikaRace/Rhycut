@@ -57,4 +57,8 @@ func _on_restart_pressed() -> void:
 
 func _on_back_to_menu_pressed() -> void:
 	GameState.reset_state()
+	AudioHelper.stop_game()
+	var idx = AudioServer.get_bus_index("Music")
+	var pitch_effect = AudioServer.get_bus_effect(idx, 0) as AudioEffectPitchShift
+	pitch_effect.pitch_scale = 1.0
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")

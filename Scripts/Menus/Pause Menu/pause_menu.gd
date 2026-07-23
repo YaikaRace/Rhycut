@@ -23,6 +23,7 @@ func restart_level() -> void:
 	if is_editor: return
 	get_tree().paused = false
 	GameState.reset_level()
+	AudioHelper.stop_game()
 	get_tree().reload_current_scene()
 
 func _on_resume_pressed() -> void:
@@ -32,6 +33,10 @@ func _on_resume_pressed() -> void:
 func _on_exit_pressed() -> void:
 	get_tree().paused = false
 	GameState.reset_state()
+	AudioHelper.stop_game()
+	var idx = AudioServer.get_bus_index("Music")
+	var pitch_effect = AudioServer.get_bus_effect(idx, 0) as AudioEffectPitchShift
+	pitch_effect.pitch_scale = 1.0
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 func _on_settings_pressed() -> void:

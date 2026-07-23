@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 		preview.hide()
 	if not song_player.stream_paused:
 		preview.hide()
-		GameState.current_song_position = song_player.get_playback_position()
+		AudioHelper.current_playback_position = song_player.get_playback_position()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -39,7 +39,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				add_bomb()
 
 func add_note() -> void:
-	var audio_time = GameState.current_song_position
+	var audio_time = AudioHelper.time
 	var pos = get_global_mouse_position()
 	var note = NoteResource.new(0, audio_time, pos)
 	beatmap.notes.append(note)
@@ -47,7 +47,7 @@ func add_note() -> void:
 	respawn_notes()
 
 func add_bomb() -> void:
-	var audio_time = GameState.current_song_position
+	var audio_time = AudioHelper.time
 	var pos = get_global_mouse_position()
 	var note = NoteResource.new(1, audio_time, pos)
 	beatmap.notes.append(note)
@@ -96,7 +96,7 @@ func _on_note_input_event(viewport: Node, event: InputEvent, shape_idx: int, not
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT and song_player.stream_paused:
 			if mode == "selection":
-				GameState.current_song_position = note.resource.time
+				AudioHelper.time = note.resource.time
 			elif mode == "eraser":
 				var idx = note.get_meta("index")
 				beatmap.notes.remove_at(idx)
@@ -106,18 +106,18 @@ func _on_editor_hud_song_position_changed(new_position: float) -> void:
 	if not song_player.stream:
 		return
 	var song_duration = song_player.stream.get_length()
-	GameState.current_song_position = song_duration * new_position
+	AudioHelper.time = song_duration * new_position
 	song_player.seek(song_duration * new_position)
 
 func _on_editor_hud_pause_music() -> void:
+	AudioHelper.pause_game()
 	song_player.stream_paused = true
 	for note in notes_container.get_children():
 		note.paused = true
 
 func _on_editor_hud_play_music() -> void:
-	var pos = GameState.current_song_position + AudioServer.get_time_since_last_mix()
-	if OS.has_feature("web"):
-		pos += 0.06
+	AudioHelper.start_game()
+	var pos = AudioHelper.time
 	song_player.play(max(0, pos))
 	song_player.stream_paused = false
 	for note in notes_container.get_children():
@@ -126,17 +126,17 @@ func _on_editor_hud_play_music() -> void:
 func _on_editor_hud_beat_back() -> void:
 	song_player.seek(song_player.get_playback_position() - rhythm.beat_length)
 	if song_player.stream_paused:
-		GameState.current_song_position -= rhythm.beat_length / 4
-		GameState.current_song_position = max(GameState.current_song_position, 0)
+		AudioHelper.time -= rhythm.beat_length / 4
+		AudioHelper.time = max(AudioHelper.time, 0)
 
 func _on_editor_hud_beat_forward() -> void:
 	song_player.seek(song_player.get_playback_position() + rhythm.beat_length)
 	if song_player.stream_paused:
-		GameState.current_song_position += rhythm.beat_length / 4
-		GameState.current_song_position = min(GameState.current_song_position, song_player.stream.get_length())
+		AudioHelper.time += rhythm.beat_length / 4
+		AudioHelper.time = min(AudioHelper.time, song_player.stream.get_length())
 
 func _on_editor_hud_play_preview() -> void:
-	preview_player.play(GameState.current_song_position)
+	preview_player.play(AudioHelper.time)
 
 func _on_editor_hud_pause_preview() -> void:
 	preview_player.stop()
@@ -149,12 +149,13 @@ func _on_editor_hud_beatmap_loaded(bm: BeatMap) -> void:
 
 func _on_editor_hud_audio_loaded(audio: AudioStream) -> void:
 	beatmap.audio = audio
-	song_player.stop()
 	song_player.stream = audio
 	preview_player.stream = audio
 	editor_hud.change_duration_label(song_player.stream.get_length())
 	editor_hud.change_position_bar_step(rhythm.beat_length / song_player.stream.get_length() / 4)
 	GameState.song_length = audio.get_length()
+	AudioHelper.start_game()
+	AudioHelper.stop_game()
 
 func _on_editor_hud_bpm_changed(bpm: float) -> void:
 	rhythm.bpm = bpm
